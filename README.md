@@ -7,6 +7,7 @@ Auto-deploy [Shlink](https://shlink.io/) URL shortener to Azure Container Apps w
 - **Azure Container Apps**: Shlink container (shlinkio/shlink:stable) with scale 0-5
 - **PostgreSQL Flexible Server**: Standard_B1ms with public access
 - **Terraform**: Infrastructure as Code
+- **Terraform Cloud**: Remote state management (Free tier)
 - **GitHub Actions**: Auto-deploy on push to main
 - **Cost**: $0/month (scale-to-zero + Azure free tier)
 
@@ -86,13 +87,14 @@ echo "AZURE_SUBSCRIPTION_ID: $(az account show --query id -o tsv)"
 
 Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
 
-Add these 3 secrets:
+Add these 4 secrets:
 
 | Secret Name | Value |
 |-------------|-------|
 | `AZURE_CLIENT_ID` | Application (Client) ID from step 3 |
 | `AZURE_TENANT_ID` | Tenant ID from step 3 |
 | `AZURE_SUBSCRIPTION_ID` | Subscription ID from step 3 |
+| `TF_API_TOKEN` | Terraform Cloud API token (already configured) |
 
 ### 5. Deploy to Azure
 
