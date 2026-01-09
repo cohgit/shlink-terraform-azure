@@ -14,6 +14,10 @@ terraform {
 
 provider "azurerm" {
   features {}
+  
+  use_oidc                   = true
+  use_cli                    = false
+  skip_provider_registration = false
 }
 
 # Random API key for Shlink
