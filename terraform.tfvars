@@ -9,7 +9,7 @@
 
 # PostgreSQL Admin Password (REQUIRED - min 8 characters, use strong password)
 # IMPORTANT: Change this to a secure password before deploying!
-postgres_admin_password = "ChangeMe_SecurePass123!"
+postgres_admin_password = "YOUR_SECURE_PASSWORD_HERE"
 
 # Shlink Default Domain (REQUIRED)
 # Use the Container App URL initially, then update with your custom domain
@@ -22,5 +22,6 @@ shlink_default_domain = "temp-domain.com"
 geolite_license_key = ""
 
 # Your Public IP Address (REQUIRED - for PostgreSQL firewall)
-# Current IP detected: 186.104.177.156
-allowed_ip_address = "186.104.177.156"
+# Get your IP: curl https://ifconfig.me
+# Example: "203.0.113.45"
+allowed_ip_address = "YOUR_PUBLIC_IP_HERE"
