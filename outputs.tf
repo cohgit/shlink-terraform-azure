@@ -1,0 +1,51 @@
+output "container_app_url" {
+  description = "Shlink Container App URL"
+  value       = "https://${azurerm_container_app.shlink.ingress[0].fqdn}"
+}
+
+output "container_app_fqdn" {
+  description = "Container App FQDN (for CNAME records)"
+  value       = azurerm_container_app.shlink.ingress[0].fqdn
+}
+
+output "shlink_api_key" {
+  description = "Shlink Initial API Key"
+  value       = random_password.shlink_api_key.result
+  sensitive   = true
+}
+
+output "postgres_host" {
+  description = "PostgreSQL Server FQDN"
+  value       = azurerm_postgresql_flexible_server.shlink.fqdn
+}
+
+output "postgres_database" {
+  description = "PostgreSQL Database Name"
+  value       = azurerm_postgresql_flexible_server_database.shlink.name
+}
+
+output "deployment_instructions" {
+  description = "Post-deployment instructions"
+  value       = <<-EOT
+  
+  ✅ Shlink deployed successfully!
+  
+  🔗 Access your Shlink instance:
+     ${azurerm_container_app.shlink.ingress[0].fqdn}
+  
+  🔑 API Key (save this securely):
+     Run: terraform output -raw shlink_api_key
+  
+  📝 Test your deployment:
+     curl -X POST https://${azurerm_container_app.shlink.ingress[0].fqdn}/rest/v3/short-urls \
+       -H "X-Api-Key: $(terraform output -raw shlink_api_key)" \
+       -H "Content-Type: application/json" \
+       -d '{"longUrl": "https://github.com"}'
+  
+  🌐 Custom Domain Setup:
+     Add CNAME record: shlink.tudominio.cl -> ${azurerm_container_app.shlink.ingress[0].fqdn}
+  
+  💰 Cost: $0/month (scale-to-zero + Azure free tier)
+  
+  EOT
+}
