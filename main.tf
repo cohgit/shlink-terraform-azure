@@ -216,6 +216,7 @@ resource "azurerm_container_app" "shlink_web" {
 
   ingress {
     external_enabled = true
+    allow_insecure   = true
     target_port      = 8080
     traffic_weight {
       percentage      = 100
