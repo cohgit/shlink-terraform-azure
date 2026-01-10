@@ -37,6 +37,7 @@ output "container_app_environment_static_ip" {
 output "container_app_verification_id" {
   description = "Verification ID for Custom Domain validation (TXT record value)"
   value       = azurerm_container_app.shlink.custom_domain_verification_id
+  sensitive   = true
 }
 
 output "deployment_instructions" {
