@@ -29,6 +29,16 @@ output "postgres_database" {
   value       = azurerm_postgresql_flexible_server_database.shlink.name
 }
 
+output "container_app_environment_static_ip" {
+  description = "Static IP address of the Container Apps Environment"
+  value       = azurerm_container_app_environment.shlink.static_ip_address
+}
+
+output "container_app_verification_id" {
+  description = "Verification ID for Custom Domain validation (TXT record value)"
+  value       = azurerm_container_app.shlink.custom_domain_verification_id
+}
+
 output "deployment_instructions" {
   description = "Post-deployment instructions"
   value       = <<-EOT
