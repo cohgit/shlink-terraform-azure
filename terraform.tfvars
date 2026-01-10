@@ -15,7 +15,7 @@
 # Shlink Default Domain (REQUIRED)
 # Use the Container App URL initially, then update with your custom domain
 # After first deploy, you'll get the URL from outputs
-shlink_default_domain = "1.ogo.ct.ws"
+shlink_default_domain = "ca-shlink.greenstone-7ec642b8.eastus2.azurecontainerapps.io"
 
 # MaxMind GeoLite2 License Key (OPTIONAL - for geolocation features)
 # Get free key at: https://www.maxmind.com/en/geolite2/signup
