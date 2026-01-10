@@ -162,6 +162,35 @@ curl https://YOUR_CONTAINER_APP.azurecontainerapps.io/rest/v3/short-urls \
 
 3. Push changes to trigger redeployment
 
+### 🌐 FreeDNS (freedns.afraid.org) Setup
+
+If you are using a dynamic DNS provider like **FreeDNS**, CNAME records might be restricted. Follow these steps:
+
+1. **Get your Static IP**:
+   Check the `Deployment Summary` or run:
+   ```bash
+   terraform output -raw container_app_environment_static_ip
+   ```
+
+2. **Create A Record**:
+   - Type: `A`
+   - Subdomain: `your-subdomain` (e.g. `ogu`)
+   - Destination: `YOUR_STATIC_IP` (e.g. `172.193.37.122`)
+
+3. **Create TXT Verification Record**:
+   - Azure needs to verify ownership. Get the ID:
+     ```bash
+     terraform output -raw container_app_verification_id
+     ```
+   - Go to FreeDNS → **TXT Records** (link usually at bottom) or "Manage" → Add TXT.
+   - Host: `asuid.your-subdomain` (e.g. `asuid.ogu`)
+   - Value: `YOUR_VERIFICATION_ID`
+
+4. **Update Terraform**:
+   Set `shlink_default_domain = "ogu.mooo.com"` and deploy.
+
+> **Note**: This method enables **HTTP** access. HTTPS might require Cloudflare as Azure Managed Certs usually need CNAME.
+
 ## 💰 Cost Breakdown
 
 | Resource | SKU | Cost |
