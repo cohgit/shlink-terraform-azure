@@ -8,8 +8,9 @@
 # location = "eastus2"
 
 # PostgreSQL Admin Password (REQUIRED - min 8 characters, use strong password)
-# IMPORTANT: Change this to a secure password before deploying!
-postgres_admin_password = "YOUR_SECURE_PASSWORD_HERE"
+# PostgreSQL Admin Password
+# Set via TF_VAR_postgres_admin_password (GitHub Secret)
+# postgres_admin_password = "YOUR_SECURE_PASSWORD_HERE"
 
 # Shlink Default Domain (REQUIRED)
 # Use the Container App URL initially, then update with your custom domain
@@ -21,7 +22,6 @@ shlink_default_domain = "temp-domain.com"
 # Leave empty to skip geolocation features
 geolite_license_key = ""
 
-# Your Public IP Address (REQUIRED - for PostgreSQL firewall)
-# Get your IP: curl https://ifconfig.me
-# Example: "203.0.113.45"
-allowed_ip_address = "YOUR_PUBLIC_IP_HERE"
+# Your Public IP Address
+# Set via TF_VAR_allowed_ip_address (GitHub Secret)
+# allowed_ip_address = "YOUR_PUBLIC_IP_HERE"
