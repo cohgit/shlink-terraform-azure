@@ -177,6 +177,11 @@ resource "azurerm_container_app" "shlink" {
       percentage      = 100
       latest_revision = true
     }
+
+    custom_domain {
+      name                     =var.shlink_default_domain
+      certificate_binding_type = "Managed"
+    }
   }
 }
 
