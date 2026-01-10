@@ -3,6 +3,11 @@ output "container_app_url" {
   value       = "https://${azurerm_container_app.shlink.ingress[0].fqdn}"
 }
 
+output "web_client_url" {
+  description = "Shlink Web Client URL (Admin Interface)"
+  value       = "https://${azurerm_container_app.shlink_web.ingress[0].fqdn}"
+}
+
 output "container_app_fqdn" {
   description = "Container App FQDN (for CNAME records)"
   value       = azurerm_container_app.shlink.ingress[0].fqdn
@@ -35,6 +40,9 @@ output "deployment_instructions" {
   
   🔑 API Key (save this securely):
      Run: terraform output -raw shlink_api_key
+
+  🖥️ Admin Interface (Web Client):
+     ${azurerm_container_app.shlink_web.ingress[0].fqdn}
   
   📝 Test your deployment:
      curl -X POST https://${azurerm_container_app.shlink.ingress[0].fqdn}/rest/v3/short-urls \

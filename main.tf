@@ -179,3 +179,47 @@ resource "azurerm_container_app" "shlink" {
     }
   }
 }
+
+# Container App - Shlink Web Client
+resource "azurerm_container_app" "shlink_web" {
+  name                         = "ca-shlink-web"
+  container_app_environment_id = azurerm_container_app_environment.shlink.id
+  resource_group_name          = azurerm_resource_group.shlink.name
+  revision_mode                = "Single"
+
+  template {
+    min_replicas = 0
+    max_replicas = 5
+
+    container {
+      name   = "shlink-web-client"
+      image  = "shlinkio/shlink-web-client:stable"
+      cpu    = 0.5
+      memory = "1Gi"
+
+      env {
+        name  = "SHLINK_SERVER_URL"
+        value = "https://${azurerm_container_app.shlink.ingress[0].fqdn}"
+      }
+
+      env {
+        name  = "SHLINK_SERVER_API_KEY"
+        value = random_password.shlink_api_key.result
+      }
+    }
+
+    http_scale_rule {
+      name                = "http-scale"
+      concurrent_requests = 10
+    }
+  }
+
+  ingress {
+    external_enabled = true
+    target_port      = 80
+    traffic_weight {
+      percentage      = 100
+      latest_revision = true
+    }
+  }
+}
