@@ -223,3 +223,10 @@ resource "azurerm_container_app" "shlink_web" {
     }
   }
 }
+
+# Custom Domain for Shlink
+resource "azurerm_container_app_custom_domain" "shlink" {
+  name                      = var.shlink_default_domain
+  container_app_id          = azurerm_container_app.shlink.id
+  certificate_binding_type  = "Managed"
+}
