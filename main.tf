@@ -228,5 +228,5 @@ resource "azurerm_container_app" "shlink_web" {
 resource "azurerm_container_app_custom_domain" "shlink" {
   name                      = var.shlink_default_domain
   container_app_id          = azurerm_container_app.shlink.id
-  certificate_binding_type  = "Managed"
+  certificate_binding_type  = "Disabled"
 }
